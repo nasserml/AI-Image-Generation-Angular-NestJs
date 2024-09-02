@@ -1,10 +1,10 @@
-import { Component, DoCheck, inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, DoCheck, inject, OnDestroy, OnInit } from '@angular/core';
 import { LoaderComponent } from '../../additions/loader/loader.component';
 import { CardComponent } from '../../additions/card/card.component';
 import { FormFieldComponent } from '../../additions/form-field/form-field.component';
 import { CardsComponent } from '../../additions/cards/cards.component';
 import { Apollo } from 'apollo-angular';
-import { Subscribable, Subscription } from 'rxjs';
+import {  Subscription } from 'rxjs';
 import { GET_POSTS } from '../../../Base/queries/queries';
 import { Post } from '../../../shared/interface/post';
 import {  ReactiveFormsModule } from '@angular/forms';
@@ -18,6 +18,8 @@ import {  ReactiveFormsModule } from '@angular/forms';
 })
 export class HomeComponent implements OnInit {
 
+  
+
 
 
 
@@ -26,6 +28,7 @@ export class HomeComponent implements OnInit {
   searchResults:Post[] = [];
   searchText:string = '';
   private _apollo = inject(Apollo);
+   private _changeDetectorRef = inject(ChangeDetectorRef)
   private querySubscription!: Subscription;
 
 
@@ -46,10 +49,13 @@ export class HomeComponent implements OnInit {
     this.loading = true;
     this.querySubscription = this._apollo.watchQuery<any>({
       query: GET_POSTS,
+      fetchPolicy: 'network-only'
     }).valueChanges.subscribe({
       next: ({data, loading}) =>{
         this.posts = data.getPosts as Post[];
         this.loading = false;
+
+        this._changeDetectorRef.detectChanges();
 
         
 

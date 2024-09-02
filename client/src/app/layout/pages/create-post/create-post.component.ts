@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormFieldComponent } from '../../additions/form-field/form-field.component';
@@ -6,6 +6,7 @@ import { LoaderComponent } from '../../additions/loader/loader.component';
 import { getRandomPrompt } from '../../../shared/utils/random-prompt';
 import {Apollo, MutationResult} from 'apollo-angular'
 import { CREATE_POST, GENERATE_IMAGE } from '../../../Base/mutations/mutations';
+import { GET_POSTS } from '../../../Base/queries/queries';
 interface GenImage{
   generateImage: string
 }
@@ -20,6 +21,7 @@ export class CreatePostComponent implements OnInit {
   private _router = inject(Router);
   private _formBuilder = inject(FormBuilder);
   private _apollo = inject(Apollo);
+  private _changeDetectorRef = inject(ChangeDetectorRef);
 
   generateImgState:boolean = false;
   loadingState:boolean = false;
@@ -90,6 +92,8 @@ export class CreatePostComponent implements OnInit {
         }).subscribe( ({data})=> {
           this.loadingState = false;
           this._router.navigate(['/']);
+
+         
     
         }, 
           error => {
