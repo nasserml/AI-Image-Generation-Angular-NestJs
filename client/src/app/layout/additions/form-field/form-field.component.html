@@ -1,0 +1,15 @@
+<div>
+    <div class="flex items-center gap-3 mb-3">
+        <label [for]="name" class="block text-sm font-medium text-gray-100">{{labelName}}</label>
+
+        @if(isSurpriseMe) {
+            <button type="button" (click)="handleSurpriseMe()" class="font-semibold text-xs bg-slate-700 py-1 rounded-lg text-white" > 
+                Surprise me
+
+            </button>
+        }
+
+
+    </div>
+    <input [type]="type" [formControlName]="formControlName" [id]="name" [name]="name" [placeholder]="placeholder"  (change)="change()" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"/>
+</div>

@@ -1,0 +1,20 @@
+<div class="rounded-2xl shadow-03346E group relative shadow-xl hover:shadow-2xl hover:shadow-03346E  transition-all duration-300 ">
+    
+    <img [src]="post.photo" class="w-full h-auto object-cover rounded-2xl" [alt]="post.prompt">
+
+    <div class="group-hover:flex flex-col max-h-[90%] hidden absolute bottom-0 left-0 right-0 bg-2E236C bg-opacity-50 m-2 p-4 rounded-lg transition-all duration-300">
+
+        <p class="text-DDE6ED text-md overflow-y-auto prompt">{{post.prompt}}</p>
+
+        <div class="mt-5 flex justify-between items-center gap-2">
+
+            <div class="flex items-center gap-2 ">
+                <div class="w-7 h-7 rounded-full object-cover bg-6EACDA bg-opacity-70 flex justify-center items-center text-021535 text-xs font-bold">{{post.name![0]}}</div>
+                <p class="text-9DB2BF text-sm">{{post.name}}</p>
+            </div>
+            <img src="imgs/download.png" class="w-6 h-6 object-contain invert cursor-pointer" (click)="downloadImg()" alt="">
+        </div>
+
+    </div>
+
+</div>

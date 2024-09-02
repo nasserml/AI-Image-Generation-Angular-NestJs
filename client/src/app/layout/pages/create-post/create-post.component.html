@@ -1,0 +1,92 @@
+<section class="mx-auto w-3/4">
+    <div>
+        <h1 class="font-extrabold text-DDE6ED text-[32px] text-center">Create Post</h1>
+    
+        <p class="mt-2 text-9DB2BF text-[16px] max-w-[500px]">Generate Image using AI and Share it</p>
+    </div>
+    <form class="mt-10 max-w-3xl " (ngSubmit)="createPost()" [formGroup]="postForm">
+        <div class="flex flex-col gap-4">
+            <div>
+
+                <div class="relative z-0 w-full mb-5 group">
+                    <input formControlName="name" type="text" (change)="nameChange()" name="name" id="name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Enter Your Name</label>
+                </div>
+
+               
+
+            </div>
+
+            <div>
+
+                <div class="relative z-0 w-full mb-5 group">
+                    <input (change)="promptChange()" formControlName="prompt" type="text" name="prompt" id="prompt" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="prompt" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Enter Your Prompt</label>
+                </div>
+
+                @if(isSurpriseMe) {
+                    <button type="button" class="text-white bg-gradient-to-r from-433D8B via-[#433D70] to-[#433D60] hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-[#433D9B] dark:focus:ring-[#433DAB] shadow-lg shadow-[#433D80]/50 dark:shadow-lg dark:shadow-[#433D7B]/80 font-medium rounded-lg text-sm px-3 py-1 text-center me-2 mb-2" (click)="handleSurpriseMe()">Surprise Me</button>
+
+                
+                }
+
+           
+
+            </div>
+
+
+            <div class="relative bg-17153B border border-[#021570] text-gray-200 text-sm rounded-xl focus:ring-[#021590] focus:border-[#021520] w-96 p- h-96 flex justify-center items-center mx-auto">
+                @if(photo) {
+                    <img [src]="photo"  class="w-full h-full object-contain"/>
+
+                }@else { 
+                    <img src="imgs/preview.png"  alt="preview" class="w-9/12 h-9/12 object-contain opacity-40">
+                }
+
+                @if(generateImgState ) {
+                    <div class="absolute inset-0 z-0 flex justify-center items-center bg-black bg-opacity-50 rounded-xl">
+                        <app-loader/>
+                    </div>
+                }
+
+            </div>
+
+
+
+        </div>
+
+        <div class="mt-6 flex gap-6">
+
+            @if (generateImgState) {
+
+                <button disabled type="button" class="text-DDE6ED cursor-not-allowed bg-[#1F6E8C]  focus:ring-4 focus:ring-[#1F6EBC] font-medium rounded-xl text-sm w-full   dark:bg-[#1F6E8C]  focus:outline-none transition-colors duration-300 py-2.5   dark:focus:ring-bg-03346E opacity-80">
+                    <i class="fa-solid fa-spinner fa-spin fa-xl"></i>
+                </button>
+            } @else {
+
+                <button (click)="generateImage()" type="button" class="text-DDE6ED bg-[#1F6E8C] hover:bg-03346E focus:ring-4 focus:ring-[#1F6EBC] font-medium rounded-xl text-sm w-full py-2.5 me-2 mb-2 dark:bg-[#1F6E9C] dark:hover:bg-[#1F6E8C] focus:outline-none transition-colors duration-300  dark:focus:ring-bg-03346E">Generate Image</button>
+
+            }
+
+
+        </div>
+
+        
+        <div class="mt-9 ">
+            <p class="mt-3 text-9DB2BF text-sm">After Generating The Image You Can Share It</p>
+
+            @if(loadingState) {
+
+                <button  disabled class="cursor-not-allowed mt-4 opacity-50 text-DDE6ED bg-433D8B  focus:ring-4 focus:ring-[#433DBB] font-medium rounded-xl text-sm w-full py-2.5 me-2 mb-2 dark:bg-433D8B  focus:outline-none transition-colors duration-300  dark:focus:ring-bg-03346E"><i class="fa-solid fa-spinner fa-spin fa-xl"></i></button>
+
+            } @else {
+                <button  type="submit" class="mt-4 text-DDE6ED bg-433D8B hover:bg-[#433D6B] focus:ring-4 focus:ring-[#433DBB] font-medium rounded-xl text-sm w-full py-2.5 me-2 mb-2 dark:bg-433D8B dark:hover:bg-[#433DAB] focus:outline-none transition-colors duration-300  dark:focus:ring-bg-03346E">Share The Image</button>
+                
+            }
+
+
+
+        </div>
+    </form>
+
+</section>

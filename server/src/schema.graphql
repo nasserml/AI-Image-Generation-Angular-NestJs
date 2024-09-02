@@ -1,0 +1,23 @@
+
+type Post{
+    name: String!
+    prompt: String!
+    photo: String!
+}
+
+type Query{
+    hello: string!
+    sayHello: string!
+    welcome: string!
+    helloGen: string!
+    getPosts: Post[]!
+}
+
+type Mutation{
+    GenerateImage {
+        generateImage(prompt: string!)
+    }
+
+    createPost(name: String!, prompt: String!, photo: String!):Post
+    
+}
